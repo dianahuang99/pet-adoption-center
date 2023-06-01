@@ -321,7 +321,7 @@ def list_animals(page_num):
     for animal in animals:
         if animal.get("description") != None:
             animal.update({'description': html.unescape(animal.get('description'))})        
-
+            
     animal_likes = [int(saved_animal.id) for saved_animal in g.user.animal_likes]
 
     return render_template("animals/index.html", animals=animals, page_num=page_num + 1, animal_likes=animal_likes, name=name, types=types, type=type, gender=gender, html=html)
