@@ -57,7 +57,7 @@ def retrieve_token_expiration_time():
 def refresh_token():
     new_token = retrieve_new_token()
     session['oauth_token'] = new_token
-    expiration_time = datetime.now() + timedelta(minutes=60)  # Set the new token expiration time
+    expiration_time = datetime.now() + timedelta(minutes=50)  # Set the new token expiration time
     session['token_expiration_time'] = expiration_time
 
 def make_api_request(url, method='GET', headers=None, params=None, data=None):
@@ -65,7 +65,7 @@ def make_api_request(url, method='GET', headers=None, params=None, data=None):
         # No token in session, retrieve a new one
         new_token = retrieve_new_token()
         session['oauth_token'] = new_token
-        expiration_time = datetime.now() + timedelta(minutes=60)
+        expiration_time = datetime.now() + timedelta(minutes=50)
         session['token_expiration_time'] = expiration_time
     elif token_expired():
         # Token has expired, refresh it
@@ -318,7 +318,10 @@ def list_animals(page_num):
     response_animals = make_api_request(url_animals, params=params)
     data = response_animals.json()
     animals = data['animals']
-    
+    for animal in animals:
+        if animal.get("description") != None:
+            animal.update({'description': html.unescape(animal.get('description'))})        
+
     animal_likes = [int(saved_animal.id) for saved_animal in g.user.animal_likes]
 
     return render_template("animals/index.html", animals=animals, page_num=page_num + 1, animal_likes=animal_likes, name=name, types=types, type=type, gender=gender, html=html)
