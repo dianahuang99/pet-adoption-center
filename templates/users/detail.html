@@ -1,11 +1,8 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
 <div id="main-hero" class="full-width">
   <div class="full-width" style='height: 96px' alt=""></div>
 </div>
-
 <div class="row full-width">
   <div class="container">
     <div class="row justify-content-end">
@@ -42,16 +39,13 @@
     </div>
   </div>
 </div>
-
 <div class="row">
   <div class="col-sm-3">
     <h4 id="sidebar-message">Hi <b>{{ user.username }}</b>. This page is where you can find your saved
-      organizations and animals.</h4>
+      organizations and animals.
+    </h4>
   </div>
-
   {% block user_details %}
   {% endblock %}
-
 </div>
-
 {% endblock %}

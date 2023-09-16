@@ -1,27 +1,22 @@
 {% extends 'users/detail.html' %}
-
 {% block user_details %}
-
 <div class="col-sm-9">
     <div class="row">
-
-        <ul class="list-group" id="messages">
+        <ul class="list-group" id="org-animal-list">
             {% for org in orgs %}
             <li class="list-group-item">
-                <a href="/organizations/details/{{ org.id  }}" class="message-link">
-                    <a href="/organizations/details/{{ org.id }}">
-                        <img src="{{ org.img_url }}" alt="" class="timeline-image">
+                <a href="/organization/details/{{ org.id  }}" class="item-link">
+                    <a href="/organization/details/{{ org.id }}">
+                        <img src="{{ org.img_url }}" alt="" class="saved-list-image">
                     </a>
-
-                    <div class="message-area">
-
+                    <div class="org-animal-name">
                         <p>{{ org.name }}</p>
                     </div>
-                    <form method="POST" action="/organization/save/{{ org.id }}" id="messages-form">
+                    <form method="POST" action="/organization/save/{{ org.id }}" class="save-heart-button">
                         <button class="
-                btn 
-                btn-sm 
-                {{'btn-danger' if org.id in org_likes else 'btn-secondary'}}">
+                  btn 
+                  btn-sm 
+                  {{'btn-danger' if org.id in org_likes else 'btn-secondary'}}">
                             <i class="fa fa-heart"></i>
                         </button>
                     </form>
@@ -29,6 +24,5 @@
             {% endfor %}
         </ul>
     </div>
-
 </div>
 {% endblock %}

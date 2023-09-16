@@ -70,43 +70,9 @@ ul.nav.navbar-nav li {
   display: flex;
 }
 
-nav form.navbar-form {
-  display: flex;
-  position: relative;
-}
-
-#search.form-control {
-  border-radius: 20px;
-  margin-bottom: 0;
-  width: 100%;
-  font-size: 13px;
-  padding-right: 28px;
-  box-sizing: border-box;
-}
-
-#search.form-control + .btn {
-  position: absolute;
-  right: 9px;
-  top: 2px;
-  bottom: 4px;
-  z-index: 1;
-  padding: 0;
-  color: #66757f;
-}
-
-#search.form-control + .btn:active,
-#search.form-control + .btn:focus {
-  box-shadow: none;
-}
-
-#search:active,
-#search:focus {
-  box-shadow: none;
-  border: 2px solid #007bff;
-}
 
 /* on "onboarding" pages (signup & login), the navbar is
-   different: no search box, the logo is centered, and it has
+   different: the logo is centered, and it has
    a background color.
  */
 
@@ -144,11 +110,6 @@ nav form.navbar-form {
   background-color: #fff;
 }
 
-@media (max-width: 468px) {
-  nav form.navbar-form {
-    display: none;
-  }
-}
 
 nav + .container {
   margin-bottom: 1rem;
@@ -160,19 +121,19 @@ nav + .container {
   margin-top: 100px;
 }
 
-.timeline-image {
+.saved-list-image {
   border-radius: 48px;
   height: 48px;
   width: 48px;
   margin-top: 2px;
 }
 
-.message-area,
-.timeline-image {
+.org-animal-name,
+.saved-list-image {
   display: inline-block;
 }
 
-.message-area {
+.org-animal-name {
   margin-left: 10px;
 }
 
@@ -234,32 +195,13 @@ nav + .container {
   padding-top: 3px;
 }
 
-#messages {
-  position: relative;
-}
-
-#messages .message-link {
+#org-animal-list .item-link {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 1;
-}
-
-#messages .list-group-item a:not(.message-link) {
-  position: relative;
-  z-index: 2;
-}
-
-#messages .list-group-item {
-  display: flex;
-  align-items: flex-start;
-  padding: 7px 20px 12px;
-}
-
-#messages:not(.no-hover) .list-group-item:hover {
-  background-color: #e6ecf0;
 }
 
 #sidebar-message {
@@ -275,13 +217,9 @@ nav + .container {
   }
 }
 
-.user-location {
-  color: #657786;
-}
+/* ==================== Animals and Organizations on saved page */
 
-/* ==================== User cards on follower/following pages */
-
-.user-card {
+.org-animal-card {
   width: 100%;
   padding-bottom: 100%;
   border-radius: 5px;
@@ -291,17 +229,17 @@ nav + .container {
   margin-top: 20px;
 }
 
-.user-card > div {
+.org-animal-card > div {
   position: absolute;
   background: white;
 }
 
-.user-card form {
+.org-animal-card form {
   margin-top: 5px;
   margin-right: 5px;
 }
 
-.user-card form .btn {
+.org-animal-card form .btn {
   min-width: 89px;
   padding: 4px 12px;
   font-size: 12px;
@@ -335,10 +273,6 @@ nav + .container {
   position: absolute;
 }
 
-.user-cards {
-  margin-bottom: 20px;
-}
-
 .card-inner {
   display: flex;
   flex-direction: column;
@@ -363,14 +297,6 @@ p.card-bio {
   overflow : hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;  
-}
-
-p.animal-name {
-  display: -webkit-box;
-  overflow : hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;  
 }
 
@@ -424,41 +350,6 @@ p.animal-name {
 
 /* ============================== Signed in Home */
 
-#home-aside > .user-card {
-  margin-top: 0;
-  overflow: hidden;
-}
-
-#home-aside > .user-card .card-link {
-  display: flex;
-}
-
-#home-aside > .user-card .card-link > p {
-  margin-left: 0.5rem;
-  margin-top: 0.25rem;
-}
-
-#home-aside > .user-card .stat {
-  padding: 14px 0 7px;
-}
-
-#home-aside > .user-card .user-stats {
-  display: flex;
-  justify-content: space-around;
-}
-
-#home-aside > .user-card > div {
-  width: 100%;
-}
-
-#home-aside .card-link > p {
-  position: relative;
-}
-
-#home-aside .stat h4 {
-  text-align: left;
-}
-
 #home-p {
   font-size: 20px;
 }
@@ -482,7 +373,7 @@ p.animal-name {
   width: 48%;
 }
 
-/* =========================== Message Show page */
+/* =========================== Saved Organizations and Animals Show page */
 
 .bg {
   position: absolute;
@@ -493,51 +384,20 @@ p.animal-name {
   background-color: #62676c;
 }
 
-#messages.no-hover .message-area {
-  width: 100%;
-}
 
-#messages.no-hover .message-heading {
-  display: flex;
-  justify-content: space-between;
-  height: 47px;
-  margin-top: 3px;
-}
-
-#messages.no-hover .message-heading .btn {
-  min-width: 105px;
-}
-
-#messages-form {
+.save-heart-button {
   position: absolute;
   top: 4px;
   right: 4px;
   z-index: 1;
 }
 
-.single-message {
-  font-size: 27px;
-  line-height: 32px;
-  letter-spacing: 0.01em;
-  margin-bottom: 10px;
+#org-animal-list .list-group-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 7px 20px 12px;
 }
 
-/* ================================ 404 page */
-
-.message-404 {
-  color: white;
-  margin-top: 2em;
-  text-align: center;
-}
-
-.message-404 a {
-  color: white;
-}
-
-.message-404 > h4.display-4 {
-  font-size: 2.5em;
-}
-
-.message-404 .form-inline input {
-  flex: 1;
+#org-animal-list:not(.no-hover) .list-group-item:hover {
+  background-color: #e6ecf0;
 }
