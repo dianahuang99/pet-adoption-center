@@ -188,7 +188,7 @@ def profile():
             return redirect(f"/users/{session[CURR_USER_KEY]}")
 
         flash("Invalid credentials.", "danger")
-        return redirect("/")
+        return redirect("/users/profile ")
     return render_template("users/edit.html", form=form)
 
 
@@ -282,7 +282,7 @@ def list_organizations(page_num):
         except KeyError:
             refresh_token()
             flash('Sorry! The session has timed out. Please try your search again.', 'danger')
-            return redirect('/organizations/1')    
+            return redirect(f'/organizations/{page_num}')    
     
     if state or location:
         try:   
@@ -461,7 +461,6 @@ def add_to_saved_animals(animal_id):
             db.session.commit()
         
         return redirect(request.referrer)
-        # return redirect("/")
     
 @app.route("/organization/save/<org_id>", methods=["POST"])
 def add_to_saved_orgs(org_id):
@@ -471,9 +470,13 @@ def add_to_saved_orgs(org_id):
         return redirect("/login")
     else:
         org = Organization.query.get(org_id)
+        
 
         if org == None:
             get_org = get_the_org(org_id)
+            # this is to check if the token has expired so to refresh the page again
+            if get_org is None:
+                return redirect(request.referrer)
             new_org = Organization(
                 id=org_id,
                 name=get_org["name"],
@@ -523,11 +526,9 @@ def get_the_org(org_id):
                 org['img_url'] = j_org["photos"][0]["medium"]
            
             return org
-        except Exception as e:
-            flash("Sorry, ", "danger")
-            session["return"] = "failed"
-            return
-    session["return"] = "success"
+        except Exception:
+            flash("Sorry! The session has timed out. Please try clicking the heart again.", "danger")
+            return    
     return org
 
 def get_the_animal(animal_id):
@@ -559,9 +560,7 @@ def get_the_animal(animal_id):
         
         except Exception:
             flash("Sorry! The session has timed out. Please try clicking the heart again.", "danger")
-            session["return"] = "failed"
-            return 
-    session["return"] = "success"    
+            return    
     return animal
 
 ##############################################################################
@@ -581,19 +580,19 @@ def homepage():
         return render_template("home-anon.html")
     
 @app.errorhandler(404)
-def page_not_found(e):
+def page_not_found():
     """Handling 404 errors"""
     flash("Page not found. You are being redirected to the home page.", "danger")
     return redirect('/')
 
 @app.errorhandler(405)
-def method_not_allowed_error(error):
+def method_not_allowed_error():
     """Handling 405 errors"""
     flash("Method not allowed. You are being redirected to the home page.", "danger")
     return redirect('/')
 
 @app.errorhandler(Exception)
-def handle_exception(error):
+def handle_exception():
     """Handling any other unexpected errors"""
     flash("An unexpected error occured. You are being redirected to the home page.", 'danger')
     return redirect('/')
