@@ -40,17 +40,16 @@
                                 alt="" class="card-hero">
                             {% else %}
                             <img src="https://colorfully.eu/wp-content/uploads/2013/05/sweet-little-dog-facebook-c.jpg"
-                                alt="Image for {{ animal.name }}" class="card-hero">
+                                alt="" class="card-hero">
                             {% endif %}
                         </div>
                         <div class="card-contents">
                             <a href="/animal/details/{{ animal.id }}" class="card-link">
                                 {% if animal.photos|length != 0 %}
-                                <img src="{{ animal.photos[0].small }}" alt="Image for {{ animal.name }}"
-                                    class="card-image">
+                                <img src="{{ animal.photos[0].small }}" alt="" class="card-image">
                                 {% else %}
                                 <img src="https://img.freepik.com/free-vector/cute-dog-sitting-cartoon-vector-icon-illustration-animal-nature-icon-concept-isolated-premium-vector-flat-cartoon-style_138676-3671.jpg"
-                                    alt="Image for {{ animal.name }}" class="card-image">
+                                    alt="" class="card-image">
                                 {% endif %}
                                 <p class='name-overflow'>{{ animal.name }}</p>
                             </a>
