@@ -6,8 +6,6 @@ import html
 from forms import UserAddForm, LoginForm, EditUserForm
 from models import db, connect_db, User, Organization, SavedOrgs, Animal, SavedAnimals
 import requests
-from dotenv import load_dotenv
-load_dotenv()
 
 CURR_USER_KEY = "curr_user"
 
@@ -27,7 +25,12 @@ connect_db(app)
 
 ###########################################
 #global variables for api
-BASE_URL = os.getenv("API_URL")
+BASE_URL = os.environ.get("API_URL")
+token_request = {
+    "grant_type": "client_credentials",
+    "client_id": os.environ.get("CLIENT_ID"),
+    "client_secret": os.environ.get("CLIENT_SECRET"),
+}
 
 #api functions
 def retrieve_new_token():
@@ -114,13 +117,6 @@ def signup():
     else:
         return render_template("users/signup.html", form=form)
 
-
-token_request = {
-    "grant_type": "client_credentials",
-    "client_id": os.getenv("CLIENT_ID"),
-    "client_secret": os.getenv("CLIENT_SECRET"),
-}
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Handle user login."""
@@ -191,7 +187,7 @@ def profile():
     return render_template("users/edit.html", form=form)
 
 
-@app.route("/users/delete")
+@app.route("/users/delete", methods=["POST"])
 def delete_user():
     """Delete user."""
 
