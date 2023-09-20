@@ -60,8 +60,6 @@ class User(db.Model):
             if is_auth:
                 return user
 
-        return False
-
 
 class SavedOrgs(db.Model):
     """Mapping saved organizations to users."""

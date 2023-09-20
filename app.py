@@ -14,13 +14,12 @@ CURR_USER_KEY = "curr_user"
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
-    "DATABASE_URL", "postgresql:///adopt_a_pet"
-)
+    "DATABASE_URL")
 
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQL ALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = False
 app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
-app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "it's a secret")
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
 toolbar = DebugToolbarExtension(app)
 
@@ -192,7 +191,7 @@ def profile():
     return render_template("users/edit.html", form=form)
 
 
-@app.route("/users/delete", methods=["POST"])
+@app.route("/users/delete")
 def delete_user():
     """Delete user."""
 
